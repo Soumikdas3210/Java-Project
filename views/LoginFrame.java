@@ -1,17 +1,18 @@
+package views;
+
 import java.awt.*;
 import javax.swing.*;
 
+public class LoginFrame extends JFrame {
 
-public class LoginFrame extends JFrame  {
-
-	JPanel jp1,jp2;
-	JLabel usernameLabel, passwordLabel, loginLabel, registerLabel, forgotpasswordLabel;
-	JTextField usernameTextField;
-	JPasswordField passwordField;
-	JButton loginBtn, registerBtn, forgotpasswordBtn;
+    JPanel jp1, jp2;
+    JLabel usernameLabel, passwordLabel, loginLabel, registerLabel, forgotpasswordLabel;
+    JTextField usernameTextField;
+    JPasswordField passwordField;
+    JButton loginBtn, registerBtn, forgotpasswordBtn;
     Font headingFont, normalFont;
 
-	LoginFrame() {
+    public LoginFrame() {
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
@@ -23,7 +24,6 @@ public class LoginFrame extends JFrame  {
         jp1 = new JPanel();
         jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
-
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
@@ -80,5 +80,5 @@ public class LoginFrame extends JFrame  {
 
         super.add(jp1);
         super.add(jp2);
-	}
+    }
 }
