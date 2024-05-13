@@ -32,51 +32,51 @@ public class LoginFrame extends JFrame  {
 
         loginLabel = new JLabel("LOGIN");
         loginLabel.setFont(headingFont);
-        loginLabel.setBounds(300, 50, 200, 46);
+        loginLabel.setBounds(300, 100, 200, 46);
         jp2.add(loginLabel);
 
         usernameLabel = new JLabel("User Name ");
         usernameLabel.setFont(normalFont);
-        usernameLabel.setBounds(50, 150, 200, 20);
+        usernameLabel.setBounds(50, 200, 200, 20);
         jp2.add(usernameLabel);
 
         usernameTextField = new JTextField();
-        usernameTextField.setBounds(50, 200, 650, 30);
+        usernameTextField.setBounds(50, 250, 650, 30);
         jp2.add(usernameTextField);
 
         passwordLabel = new JLabel("Password ");
         passwordLabel.setFont(normalFont);
-        passwordLabel.setBounds(50, 250, 200, 20);
+        passwordLabel.setBounds(50, 300, 200, 20);
         jp2.add(passwordLabel);
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(50, 300, 650, 30);
+        passwordField.setBounds(50, 350, 650, 30);
         jp2.add(passwordField);
 
         loginBtn = new JButton("Login");
         loginBtn.setFont(normalFont);
-        loginBtn.setBounds(350, 350, 150, 35);
+        loginBtn.setBounds(350, 400, 150, 35);
         jp2.add(loginBtn);
 
         forgotpasswordLabel = new JLabel("Forgot Password");
         forgotpasswordLabel.setFont(normalFont);
-        forgotpasswordLabel.setBounds(50, 500, 250, 35);
+        forgotpasswordLabel.setBounds(50, 700, 250, 35);
         jp2.add(forgotpasswordLabel);
 
         forgotpasswordBtn = new JButton("Reset");
         forgotpasswordBtn.setFont(normalFont);
-        forgotpasswordBtn.setBounds(170, 355, 100, 35);
+        forgotpasswordBtn.setBounds(270, 700, 150, 35);
         jp2.add(forgotpasswordBtn);
 
         registerLabel = new JLabel("No Account");
         registerLabel.setFont(normalFont);
-        registerLabel.setBounds(35, 400, 100, 20);
-        //jp2.add(registerLabel);
+        registerLabel.setBounds(50, 750, 250, 20);
+        jp2.add(registerLabel);
 
         registerBtn = new JButton("Register");
         registerBtn.setFont(normalFont);
-        registerBtn.setBounds(170, 395, 100, 35);
-        //jp2.add(registerBtn);
+        registerBtn.setBounds(270, 750, 150, 35);
+        jp2.add(registerBtn);
 
         super.add(jp1);
         super.add(jp2);
