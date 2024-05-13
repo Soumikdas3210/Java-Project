@@ -1,18 +1,23 @@
 package views;
-
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class LoginFrame extends JFrame {
+import repository.LoginRepository;
 
-    JPanel jp1, jp2;
-    JLabel usernameLabel, passwordLabel, loginLabel, registerLabel, forgotpasswordLabel;
-    JTextField usernameTextField;
-    JPasswordField passwordField;
-    JButton loginBtn, registerBtn, forgotpasswordBtn;
+
+public class LoginFrame extends JFrame implements ActionListener  {
+
+	JPanel jp1,jp2;
+	JLabel usernameLabel, passwordLabel, titleLabel, registerLabel, forgotpasswordLabel;
+	JTextField usernameTextField;
+	JPasswordField passwordField;
+	JButton loginBtn, registerBtn, forgotpasswordBtn;
     Font headingFont, normalFont;
 
-    public LoginFrame() {
+	public LoginFrame() {
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
@@ -25,17 +30,18 @@ public class LoginFrame extends JFrame {
         jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
 
+
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
         jp2.setBounds(800, 0, 800, 900);
         jp2.setLayout(null);
 
-        loginLabel = new JLabel("LOGIN");
-        loginLabel.setFont(headingFont);
-        loginLabel.setBounds(300, 100, 200, 46);
-        jp2.add(loginLabel);
+        titleLabel = new JLabel("LOGIN");
+        titleLabel.setFont(headingFont);
+        titleLabel.setBounds(300, 100, 200, 46);
+        jp2.add(titleLabel);
 
-        usernameLabel = new JLabel("User Name ");
+        usernameLabel = new JLabel("User Name");
         usernameLabel.setFont(normalFont);
         usernameLabel.setBounds(50, 200, 200, 20);
         jp2.add(usernameLabel);
@@ -44,7 +50,7 @@ public class LoginFrame extends JFrame {
         usernameTextField.setBounds(50, 250, 650, 30);
         jp2.add(usernameTextField);
 
-        passwordLabel = new JLabel("Password ");
+        passwordLabel = new JLabel("Password");
         passwordLabel.setFont(normalFont);
         passwordLabel.setBounds(50, 300, 200, 20);
         jp2.add(passwordLabel);
@@ -56,6 +62,7 @@ public class LoginFrame extends JFrame {
         loginBtn = new JButton("Login");
         loginBtn.setFont(normalFont);
         loginBtn.setBounds(350, 400, 150, 35);
+        loginBtn.addActionListener(this);
         jp2.add(loginBtn);
 
         forgotpasswordLabel = new JLabel("Forgot Password");
@@ -66,6 +73,7 @@ public class LoginFrame extends JFrame {
         forgotpasswordBtn = new JButton("Reset");
         forgotpasswordBtn.setFont(normalFont);
         forgotpasswordBtn.setBounds(270, 700, 150, 35);
+        //forgotpasswordBtn.addActionListener(this);
         jp2.add(forgotpasswordBtn);
 
         registerLabel = new JLabel("No Account");
@@ -76,9 +84,33 @@ public class LoginFrame extends JFrame {
         registerBtn = new JButton("Register");
         registerBtn.setFont(normalFont);
         registerBtn.setBounds(270, 750, 150, 35);
+        registerBtn.addActionListener(this);
         jp2.add(registerBtn);
 
         super.add(jp1);
         super.add(jp2);
+	}
+
+    public void actionPerformed (ActionEvent ae){
+        if(ae.getActionCommand().equals("Register")){
+            RegisterFrame rf = new RegisterFrame();
+            rf.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(ae.getActionCommand().equals("Login")){
+            String username = usernameTextField.getText();
+			String password = passwordField.getText();
+
+            LoginRepository ur = new LoginRepository();
+			boolean flag = ur.validateCredentials(username, password);
+
+			if (flag) {
+					System.out.println("Credentials Matched!");
+					this.setVisible(false);
+				}
+				else {
+					System.out.println("Invalid Credentials.");
+				}
+        }
     }
 }
