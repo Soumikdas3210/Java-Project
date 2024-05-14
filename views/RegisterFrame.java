@@ -121,14 +121,17 @@ public class RegisterFrame extends JFrame implements  ActionListener {
 					
 					String words[] = line.split("\t");
 					if (words[0].equals(username)) {
-						showMessageDialog(null,"Duplicate Username","Message",-1);
+						JOptionPane.showMessageDialog(this,"Invalid ID or Password");
+                        break;
 					}
 					else {
                         UserRepository ur = new UserRepository();
+                        System.out.println(username);
                         ur.registerUser(username, password, email);
                         LoginFrame lf = new LoginFrame();
                         lf.setVisible(true);
-                        //this.setVisible(false);
+                        this.setVisible(false);
+                        break;
 
 					}
 				}

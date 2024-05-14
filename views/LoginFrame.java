@@ -109,13 +109,13 @@ public class LoginFrame extends JFrame implements ActionListener  {
 			int flag = ur.validateCredentials(username, password);
 
 			if (flag == 1) {
-                
-                UserDashboardFrame udf = new UserDashboardFrame();
+                UserDashboardFrame udf = new UserDashboardFrame(username, password);
                 udf.setVisible(true);
 			    this.setVisible(false);
 				}
                 else if (flag == 0) {
-                    AdminDashboardFrame udf = new AdminDashboardFrame();
+
+                    AdminDashboardFrame udf = new AdminDashboardFrame(username, password);
                     udf.setVisible(true);
                     this.setVisible(false);
                     }
