@@ -1,3 +1,0 @@
-kawsur	123
-admin	456
-test	555

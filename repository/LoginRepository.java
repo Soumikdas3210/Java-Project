@@ -6,15 +6,13 @@ import java.io.FileReader;
 
 public class LoginRepository {
 
-	public boolean validateCredentials(String username, String password) {
-        boolean flag = true;
-		File f = new File("data.txt");
-			try {
-				f.createNewFile();
-			} catch(Exception ex) {
-				System.out.println(ex.getMessage());
-			}
+	public int validateCredentials(String username, String password) {
 
+		
+        int flag = 2;
+		File f = new File("D:\\java Project\\repository\\user.txt");
+		
+			
 			FileReader fr = null;
 			BufferedReader br = null;
  
@@ -23,13 +21,19 @@ public class LoginRepository {
 				br = new BufferedReader(fr);
 				String line = "";
 				while ((line = br.readLine()) != null) {
+					
 					String words[] = line.split("\t");
-					if (words[0].equals(username) && words[1].equals(password)) {
-						flag = true;
+					if ((words[0].equals(username) && words[1].equals(password))) {
+						if(words[3].equals("0")){
+							flag = 0;
+						}
+						else if (words[3].equals("1")){
+							flag = 1;
+						}
 						break;
 					}
 					else {
-						flag = false;
+						flag = 2;
 						break;
 					}
 				}

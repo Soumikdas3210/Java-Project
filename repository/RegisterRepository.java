@@ -23,7 +23,7 @@ public class RegisterRepository{
                 fw.write("\t");
                 fw.write(email);
                 fw.write("\t");
-                fw.write("0");
+                fw.write("1");
 				fw.write("\n");
 			} catch (Exception ex) {
 				System.out.println(ex.getMessage());
