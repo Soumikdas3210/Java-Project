@@ -12,9 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import entity.Admin;
 import repository.UserRepository;
 
 public class AdminDashboardFrame extends JFrame implements ActionListener  {
+    private String username, password;
 
     JPanel jp1, jp2;
     JLabel titleLabel, usernameLabel, signoutLabel, userinfoLabel,
@@ -23,11 +25,15 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
     JButton userinfoBtn, productinfoBtn, addadminBtn, salesinfoBtn, usernameBtn;       
     Font headingFont, normalFont;       
 
-    public AdminDashboardFrame(){
+    public AdminDashboardFrame(String username, String password){
+
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.username = username;
+        this.password = password;
+        Admin a1 = new Admin(username, password);
 
         headingFont = new Font("Cambria", Font.PLAIN, 30);
         normalFont = new Font("Cambria", Font.PLAIN, 20);
@@ -135,7 +141,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
             this.setVisible(false);
         }
         else if(ae.getSource()==usernameBtn){
-            
+
         }
         
     }

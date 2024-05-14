@@ -1,10 +1,15 @@
 package views;
 
 import javax.swing.*;
+
+import entity.Customer;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class UserDashboardFrame extends JFrame implements ActionListener {
+
+    private String username, password;
 
     final int width = 1600, height = 940;
 
@@ -19,11 +24,14 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
     ImageIcon userImageIcon;
 
 
-    public UserDashboardFrame() {
+    public UserDashboardFrame(String username, String password) {
         super("User Dashboard");
         this.setSize(width, height);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.username = username;
+        this.password = password;
+        Customer a1 = new Customer(username, password);
 
         //fonts sizes
         catagoryFont = new Font("Roboto", Font.BOLD, 24);
@@ -45,7 +53,7 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
         headerPanel.add(logoutButton);
 
         //username
-        userNameLabel = new JLabel("User_Name");
+        userNameLabel = new JLabel(username);
         userNameLabel.setFont(catagoryFont);
         userNameLabel.setBounds(140,10,300,80);
         headerPanel.add(userNameLabel);

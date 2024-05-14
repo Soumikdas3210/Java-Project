@@ -1,12 +1,16 @@
-import views.*;
+import javax.swing.*;
+
+import views.AdminDashboardFrame;
+import views.LoginFrame;
+import views.UserDashboardFrame;
+
 
 public class Main {
 
 	public static void main(String[] args) {
-		forgotPassword lf = new forgotPassword();
-		lf.setVisible(true);
-
-		LoginFrame lfd = new LoginFrame();
-		lfd.setVisible(true);
+		LoginFrame lf = new LoginFrame();
+	    lf.setVisible(true);
+		//AdminProfileFrame registerAdmin = new AdminProfileFrame();
+		//registerAdmin.setVisible(true);
 	}
 }

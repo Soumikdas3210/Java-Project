@@ -6,6 +6,8 @@ import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
+import entity.Customer;
+
 public class UserRepository  {
     public int validateCredentials(String username, String password) {
 
@@ -27,17 +29,15 @@ public class UserRepository  {
 					if (words[0].equals(username) && words[1].equals(password)) {
 						if(words[3].equals("0")){
 							flag = 0;
+							break;
 						}
 						else if (words[3].equals("1")){
 							flag = 1;
+							break;
 						}
-						break;
-					}
-					else {
-						flag = 2;
-						break;
 					}
 				}
+
 
 			} catch (Exception ex3) {
 				System.out.println(ex3.getMessage());
@@ -47,6 +47,7 @@ public class UserRepository  {
 
 
      public void registerUser(String username, String password, String email) {
+		System.out.println(username);
         
         File f = new File("data/user.txt");
 			try {
@@ -79,7 +80,7 @@ public class UserRepository  {
 
 	public void registerAdmin(String username, String password, String email) {
         
-        File f = new File("D:\\java Project\\repository\\user.txt");
+        File f = new File("data/user.txt");
 			try {
 				f.createNewFile();
 			} catch(Exception ex) {
@@ -108,9 +109,4 @@ public class UserRepository  {
 			}
     }
 
-	public void createUser(int flag){
-		if (flag == 1){
-
-		}
-	}
 }
