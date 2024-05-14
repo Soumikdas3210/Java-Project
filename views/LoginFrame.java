@@ -5,17 +5,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import entity.Customer;
 import repository.LoginRepository;
+import repository.UserRepository;
 
 
 public class LoginFrame extends JFrame implements ActionListener  {
 
-	JPanel jp1,jp2;
-	JLabel usernameLabel, passwordLabel, titleLabel, registerLabel, forgotpasswordLabel;
-	JTextField usernameTextField;
-	JPasswordField passwordField;
-	JButton loginBtn, registerBtn, forgotpasswordBtn;
-    Font headingFont, normalFont;
+	private JPanel jp1,jp2;
+	private JLabel usernameLabel, passwordLabel, titleLabel, registerLabel, forgotpasswordLabel;
+	private JTextField usernameTextField;
+	private JPasswordField passwordField;
+	private JButton loginBtn, registerBtn, forgotpasswordBtn;
+    private Font headingFont, normalFont;
 
 	public LoginFrame() {
         super("First Page");
@@ -101,15 +103,24 @@ public class LoginFrame extends JFrame implements ActionListener  {
             String username = usernameTextField.getText();
 			String password = passwordField.getText();
 
-            LoginRepository ur = new LoginRepository();
-			boolean flag = ur.validateCredentials(username, password);
+            
 
-			if (flag) {
-					System.out.println("Credentials Matched!");
-					this.setVisible(false);
+            UserRepository ur = new UserRepository();
+			int flag = ur.validateCredentials(username, password);
+
+			if (flag == 1) {
+                
+                UserDashboardFrame udf = new UserDashboardFrame();
+                udf.setVisible(true);
+			    this.setVisible(false);
 				}
+                else if (flag == 0) {
+                    AdminDashboardFrame udf = new AdminDashboardFrame();
+                    udf.setVisible(true);
+                    this.setVisible(false);
+                    }
 				else {
-					System.out.println("Invalid Credentials.");
+					JOptionPane.showMessageDialog(this,"Invalid ID or Password");
 				}
         }
     }

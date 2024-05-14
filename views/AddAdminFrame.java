@@ -2,33 +2,27 @@ package views;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.*;
-
-import repository.RegisterRepository;
 import repository.UserRepository;
 
 
-public class RegisterFrame extends JFrame implements  ActionListener {
+public class AddAdminFrame extends JFrame implements ActionListener {
 
 	private JPanel jp1,jp2;
-	private JLabel usernameLabel, passwordLabel, titleLabel, loginLabel, emaiLabel;
+	private JLabel usernameLabel, passwordLabel, titleLabel, backLabel, emaiLabel;
 	private JTextField usernameTextField, emailTextField;
 	private JPasswordField passwordField;
-	private JButton loginBtn, registerBtn;
+	private JButton backBtn, registerBtn;
     private Font headingFont, normalFont;
 
-	public RegisterFrame() {
+	public AddAdminFrame() {
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        headingFont = new Font("Cambria", Font.PLAIN, 50);
+        headingFont = new Font("Cambria", Font.PLAIN, 40);
         normalFont = new Font("Cambria", Font.PLAIN, 28);
 
         jp1 = new JPanel();
@@ -41,9 +35,9 @@ public class RegisterFrame extends JFrame implements  ActionListener {
         jp2.setBounds(800, 0, 800, 900);
         jp2.setLayout(null);
 
-        titleLabel = new JLabel("SIGN UP");
+        titleLabel = new JLabel("Register Admin");
         titleLabel.setFont(headingFont);
-        titleLabel.setBounds(300, 100, 200, 46);
+        titleLabel.setBounds(280, 100, 400, 46);
         jp2.add(titleLabel);
 
         usernameLabel = new JLabel("User Name ");
@@ -81,23 +75,23 @@ public class RegisterFrame extends JFrame implements  ActionListener {
 
        
 
-        loginLabel = new JLabel("Have Account");
-        loginLabel.setFont(normalFont);
-        loginLabel.setBounds(50, 750, 250, 20);
-        jp2.add(loginLabel);
+        backLabel = new JLabel("Go Back");
+        backLabel.setFont(normalFont);
+        backLabel.setBounds(50, 750, 250, 20);
+        jp2.add(backLabel);
 
-        loginBtn = new JButton("Login");
-        loginBtn.setFont(normalFont);
-        loginBtn.setBounds(230, 745, 150, 35);
-        loginBtn.addActionListener(this);
-        jp2.add(loginBtn);
+        backBtn = new JButton("Back");
+        backBtn.setFont(normalFont);
+        backBtn.setBounds(230, 745, 150, 35);
+        backBtn.addActionListener(this);
+        jp2.add(backBtn);
 
         super.add(jp1);
         super.add(jp2);
 	}
 
     public void actionPerformed (ActionEvent ae){
-        if(ae.getActionCommand().equals("Login")){
+        if(ae.getActionCommand().equals("Back")){
             LoginFrame lf = new LoginFrame();
             lf.setVisible(true);
             this.setVisible(false);
@@ -106,40 +100,15 @@ public class RegisterFrame extends JFrame implements  ActionListener {
             String username = usernameTextField.getText();
 			String password = passwordField.getText();
             String email = emailTextField.getText();
-
-            File f = new File("data/user.txt");
-		
-			
-			FileReader fr = null;
-			BufferedReader br = null;
- 
-			try {
-				fr = new FileReader(f);
-				br = new BufferedReader(fr);
-				String line = "";
-				while ((line = br.readLine()) != null) {
-					
-					String words[] = line.split("\t");
-					if (words[0].equals(username)) {
-						showMessageDialog(null,"Duplicate Username","Message",-1);
-					}
-					else {
-                        UserRepository ur = new UserRepository();
-                        ur.registerUser(username, password, email);
-                        LoginFrame lf = new LoginFrame();
-                        lf.setVisible(true);
-                        //this.setVisible(false);
-
-					}
-				}
-
-			} catch (Exception ex3) {
-				System.out.println(ex3.getMessage());
-			}
-
+            UserRepository ur = new UserRepository();
+            ur.registerAdmin(username, password, email);
+            LoginFrame lf = new LoginFrame();
+            lf.setVisible(true);
+            this.setVisible(false);
         }
         else {
             System.exit(0);
         }
     }
+
 }
