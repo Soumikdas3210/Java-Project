@@ -1,4 +1,5 @@
 package views;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,19 +14,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import entity.Admin;
-import repository.UserRepository;
+import classes.*;
 
-public class AdminDashboardFrame extends JFrame implements ActionListener  {
+public class AdminDashboardFrame extends JFrame implements ActionListener {
     private String username, password;
 
     JPanel jp1, jp2;
     JLabel titleLabel, usernameLabel, signoutLabel, userinfoLabel,
-           salesinfoLabel, newadminLabel, employeeLabel,
-           productLabel;
-    JButton userinfoBtn, productinfoBtn, addadminBtn, salesinfoBtn, usernameBtn;       
-    Font headingFont, normalFont;       
+            salesinfoLabel, newadminLabel, employeeLabel,
+            productLabel;
+    JButton userinfoBtn, productinfoBtn, addadminBtn, salesinfoBtn, usernameBtn;
+    Font headingFont, normalFont;
 
-    public AdminDashboardFrame(String username, String password){
+    public AdminDashboardFrame(String username, String password) {
 
         super("First Page");
         super.setSize(1600, 900);
@@ -41,7 +42,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
         jp1 = new JPanel();
         jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
-        
+
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
         jp2.setBounds(800, 0, 800, 900);
@@ -65,7 +66,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
 
         userinfoBtn = new JButton();
         userinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        userinfoBtn.setBounds(23, 70,360,200);
+        userinfoBtn.setBounds(23, 70, 360, 200);
         userinfoBtn.setOpaque(false);
         userinfoBtn.setFocusPainted(true);
         userinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -78,7 +79,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
 
         salesinfoBtn = new JButton();
         salesinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        salesinfoBtn.setBounds(403, 70,360,200);
+        salesinfoBtn.setBounds(403, 70, 360, 200);
         salesinfoBtn.setOpaque(false);
         salesinfoBtn.setFocusPainted(true);
         salesinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -91,7 +92,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
 
         addadminBtn = new JButton();
         addadminBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        addadminBtn.setBounds(23, 310,360,200);
+        addadminBtn.setBounds(23, 310, 360, 200);
         addadminBtn.setOpaque(false);
         addadminBtn.setFocusPainted(true);
         addadminBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -101,11 +102,11 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
         newadminLabel = new JLabel("Add Admin");
         newadminLabel.setFont(normalFont);
         newadminLabel.setBounds(145, 510, 180, 35);
-        jp2.add( newadminLabel);
+        jp2.add(newadminLabel);
 
         productinfoBtn = new JButton();
         productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        productinfoBtn.setBounds(403, 310,360,200);
+        productinfoBtn.setBounds(403, 310, 360, 200);
         productinfoBtn.setOpaque(false);
         productinfoBtn.setFocusPainted(true);
         productinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -114,11 +115,11 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
         productLabel = new JLabel("Product Information");
         productLabel.setFont(normalFont);
         productLabel.setBounds(505, 510, 180, 35);
-        jp2.add( productLabel);
+        jp2.add(productLabel);
 
         productinfoBtn = new JButton();
         productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        productinfoBtn.setBounds(213, 550,360,200);
+        productinfoBtn.setBounds(213, 550, 360, 200);
         productinfoBtn.setOpaque(false);
         productinfoBtn.setFocusPainted(true);
         productinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -127,22 +128,21 @@ public class AdminDashboardFrame extends JFrame implements ActionListener  {
         productLabel = new JLabel("Employee Information");
         productLabel.setFont(normalFont);
         productLabel.setBounds(305, 750, 180, 35);
-        jp2.add( productLabel);
-
+        jp2.add(productLabel);
 
         super.add(jp1);
         super.add(jp2);
 
     }
-    public void actionPerformed (ActionEvent ae){
-        if(ae.getSource() == addadminBtn){
+
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == addadminBtn) {
             AddAdminFrame aaf = new AddAdminFrame();
             aaf.setVisible(true);
             this.setVisible(false);
-        }
-        else if(ae.getSource()==usernameBtn){
+        } else if (ae.getSource() == usernameBtn) {
 
         }
-        
+
     }
 }

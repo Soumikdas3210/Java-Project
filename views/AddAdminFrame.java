@@ -1,22 +1,22 @@
 package views;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import repository.UserRepository;
-
+import classes.*;
 
 public class AddAdminFrame extends JFrame implements ActionListener {
 
-	private JPanel jp1,jp2;
-	private JLabel usernameLabel, passwordLabel, titleLabel, backLabel, emaiLabel;
-	private JTextField usernameTextField, emailTextField;
-	private JPasswordField passwordField;
-	private JButton backBtn, registerBtn;
+    private JPanel jp1, jp2;
+    private JLabel usernameLabel, passwordLabel, titleLabel, backLabel, emaiLabel;
+    private JTextField usernameTextField, emailTextField;
+    private JPasswordField passwordField;
+    private JButton backBtn, registerBtn;
     private Font headingFont, normalFont;
 
-	public AddAdminFrame() {
+    public AddAdminFrame() {
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
@@ -28,7 +28,6 @@ public class AddAdminFrame extends JFrame implements ActionListener {
         jp1 = new JPanel();
         jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
-
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
@@ -57,7 +56,7 @@ public class AddAdminFrame extends JFrame implements ActionListener {
         passwordField = new JPasswordField();
         passwordField.setBounds(50, 350, 650, 30);
         jp2.add(passwordField);
-        
+
         emaiLabel = new JLabel("Email ");
         emaiLabel.setFont(normalFont);
         emaiLabel.setBounds(50, 400, 200, 20);
@@ -73,8 +72,6 @@ public class AddAdminFrame extends JFrame implements ActionListener {
         registerBtn.addActionListener(this);
         jp2.add(registerBtn);
 
-       
-
         backLabel = new JLabel("Go Back");
         backLabel.setFont(normalFont);
         backLabel.setBounds(50, 750, 250, 20);
@@ -88,25 +85,23 @@ public class AddAdminFrame extends JFrame implements ActionListener {
 
         super.add(jp1);
         super.add(jp2);
-	}
+    }
 
-    public void actionPerformed (ActionEvent ae){
-        if(ae.getActionCommand().equals("Back")){
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getActionCommand().equals("Back")) {
             LoginFrame lf = new LoginFrame();
             lf.setVisible(true);
             this.setVisible(false);
-        }
-        else if(ae.getActionCommand().equals("Register")){
+        } else if (ae.getActionCommand().equals("Register")) {
             String username = usernameTextField.getText();
-			String password = passwordField.getText();
+            String password = passwordField.getText();
             String email = emailTextField.getText();
             UserRepository ur = new UserRepository();
             ur.registerAdmin(username, password, email);
             LoginFrame lf = new LoginFrame();
             lf.setVisible(true);
             this.setVisible(false);
-        }
-        else {
+        } else {
             System.exit(0);
         }
     }

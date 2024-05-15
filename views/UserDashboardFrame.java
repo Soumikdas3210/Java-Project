@@ -1,11 +1,14 @@
 package views;
 
-import javax.swing.*;
-
 import entity.Customer;
+import entity.Product;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static entity.Product.loadProductsFromFile;
 
 public class UserDashboardFrame extends JFrame implements ActionListener {
 
@@ -61,7 +64,7 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
 
 
         //user avater button
-        userImageIcon = new ImageIcon("avatar.png");
+        userImageIcon = new ImageIcon("images/mini_avatar.png");
         userButton = new JButton(userImageIcon);
         userButton.setBounds(25, 10, 80, 80); // Set preferred size for circular button
         userButton.setOpaque(false);
@@ -80,6 +83,19 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
         itemsPanel.setBounds(0,100, width, height);
         this.add(itemsPanel);
 
+        Product[] products = loadProductsFromFile("data/productData.txt");
+//        for (int i = 0; i < products.length; i++) {
+//            Product product = products[i];
+//            if (product != null) {
+//                System.out.println("Product Name: " + product.getProductName());
+//                System.out.println("Product Price: $" + product.getProductPrice());
+//                System.out.println("Product SKU: " + product.getProductSku());
+//                System.out.println("Product Image: " + product.getProductImage());
+//                System.out.println("Product Details: " + product.getProductDetails());
+//                System.out.println();
+//            }
+//
+//        }
 
         //product 1
             pro1Panel = new JPanel();
@@ -88,20 +104,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro1Panel);
             //product1 image
             pro1img = new JButton();
-            pro1img.setIcon(new ImageIcon("images/phone1.png"));
+            pro1img.setIcon(new ImageIcon(products[0].getProductImage()));
             pro1img.setBounds(15, 15, 350+25, 250);
             pro1img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro1img.setBackground(Color.WHITE);
             pro1Panel.add(pro1img);
             //product1 name
-            pro1Label = new JLabel("Iconic Nokia 3310");
+            pro1Label = new JLabel(products[0].getProductName());
             pro1Label.setBounds(15,(15+250), 200, 30);
             pro1Label.setFont(normalFont);
             pro1Label.setForeground(Color.BLACK);
             pro1Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro1Panel.add(pro1Label);
             //product1 price
-            pro1PriceLabel = new JLabel("Price: 10$");
+            pro1PriceLabel = new JLabel(products[0].getProductPrice()+"$");
             pro1PriceLabel.setBounds(15,(250+45), 100, 50);
             pro1PriceLabel.setFont(priceFont);
             pro1PriceLabel.setForeground(Color.BLUE);
@@ -128,20 +144,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro2Panel);
             //product2 image
             pro2img = new JButton();
-            pro2img.setIcon(new ImageIcon("images/phone1.png"));
+            pro2img.setIcon(new ImageIcon(products[1].getProductImage()));
             pro2img.setBounds(15, 15, 350+25, 250);
             pro2img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro2img.setBackground(Color.WHITE);
             pro2Panel.add(pro2img);
             //product2 name
-            pro2Label = new JLabel("Iconic Nokia 3310");
+            pro2Label = new JLabel(products[1].getProductName());
             pro2Label.setBounds(15,(15+250), 300, 30);
             pro2Label.setFont(normalFont);
             pro2Label.setForeground(Color.BLACK);
             pro2Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro2Panel.add(pro2Label);
             //product2 price
-            pro2PriceLabel = new JLabel("Price: 5000tk");
+            pro2PriceLabel = new JLabel(products[1].getProductPrice()+"$");
             pro2PriceLabel.setBounds(15,(250+45), 150, 50);
             pro2PriceLabel.setFont(priceFont);
             pro2PriceLabel.setForeground(Color.BLUE);
@@ -152,8 +168,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro2BuyButton.setBackground(Color.decode("#9dade1"));
             pro2BuyButton.setBounds(300,340, 80, 40);
             pro2BuyButton.setFont(normalFont);
-        pro2BuyButton.setForeground(Color.WHITE);
-        pro2BuyButton.setBackground(Color.BLACK);
+            pro2BuyButton.setForeground(Color.WHITE);
+            pro2BuyButton.setBackground(Color.BLACK);
             pro2BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro2Panel.add(pro2BuyButton);
 
@@ -165,20 +181,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro3Panel);
             //product3 image
             pro3img = new JButton();
-            pro3img.setIcon(new ImageIcon("images/phone1.png"));
+            pro3img.setIcon(new ImageIcon(products[2].getProductImage()));
             pro3img.setBounds(15, 15, 350+25, 250);
             pro3img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro3img.setBackground(Color.WHITE);
             pro3Panel.add(pro3img);
             //product3 name
-            pro3Label = new JLabel("Iconic Nokia 3310");
+            pro3Label = new JLabel(products[2].getProductName());
             pro3Label.setBounds(15,(15+250), 300, 30);
             pro3Label.setFont(normalFont);
             pro3Label.setForeground(Color.BLACK);
             pro3Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro3Panel.add(pro3Label);
             //product3 price
-            pro3PriceLabel = new JLabel("Price: 10$");
+            pro3PriceLabel = new JLabel(products[2].getProductPrice()+"$");
             pro3PriceLabel.setBounds(15,(250+45), 150, 50);
             pro3PriceLabel.setFont(priceFont);
             pro3PriceLabel.setForeground(Color.BLUE);
@@ -202,20 +218,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro4Panel);
             //product4 image
             pro4img = new JButton();
-            pro4img.setIcon(new ImageIcon("images/phone1.png"));
+            pro4img.setIcon(new ImageIcon(products[3].getProductImage()));
             pro4img.setBounds(15, 15, 350, 250);
             pro4img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro4img.setBackground(Color.WHITE);
             pro4Panel.add(pro4img);
             //product4 name
-            pro4Label = new JLabel("Iconic Nokia 3310");
+            pro4Label = new JLabel(products[3].getProductName());
             pro4Label.setBounds(15,(15+250), 300, 30);
             pro4Label.setFont(normalFont);
             pro4Label.setForeground(Color.BLACK);
             pro4Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro4Panel.add(pro4Label);
             //product4 price
-            pro4PriceLabel = new JLabel("Price: 10$");
+            pro4PriceLabel = new JLabel(products[3].getProductPrice()+"$");
             pro4PriceLabel.setBounds(15,(250+45), 150, 50);
             pro4PriceLabel.setFont(priceFont);
             pro4PriceLabel.setForeground(Color.BLUE);
@@ -226,8 +242,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro4BuyButton.setBackground(Color.decode("#9dade1"));
             pro4BuyButton.setBounds(300-25,340, 80, 40);
             pro4BuyButton.setFont(normalFont);
-        pro4BuyButton.setForeground(Color.WHITE);
-        pro4BuyButton.setBackground(Color.BLACK);
+            pro4BuyButton.setForeground(Color.WHITE);
+            pro4BuyButton.setBackground(Color.BLACK);
             pro4BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro4Panel.add(pro4BuyButton);
 
@@ -239,20 +255,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro5Panel);
             //product5 image
             pro5img = new JButton();
-            pro5img.setIcon(new ImageIcon("images/phone1.png"));
+            pro5img.setIcon(new ImageIcon(products[4].getProductImage()));
             pro5img.setBounds(15, 15, 350+25, 250);
             pro5img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro5img.setBackground(Color.WHITE);
             pro5Panel.add(pro5img);
             //product5 name
-            pro5Label = new JLabel("Iconic Nokia 3310");
+            pro5Label = new JLabel(products[4].getProductName());
             pro5Label.setBounds(15,(15+250), 300, 30);
             pro5Label.setFont(normalFont);
             pro5Label.setForeground(Color.BLACK);
             pro5Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro5Panel.add(pro5Label);
             //product5 price
-            pro5PriceLabel = new JLabel("Price: 5000tk");
+            pro5PriceLabel = new JLabel(products[4].getProductPrice()+"$");
             pro5PriceLabel.setBounds(15,(250+45), 150, 50);
             pro5PriceLabel.setFont(priceFont);
             pro5PriceLabel.setForeground(Color.BLUE);
@@ -263,8 +279,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro5BuyButton.setBackground(Color.decode("#9dade1"));
             pro5BuyButton.setBounds(300,340, 80, 40);
             pro5BuyButton.setFont(normalFont);
-        pro5BuyButton.setForeground(Color.WHITE);
-        pro5BuyButton.setBackground(Color.BLACK);
+            pro5BuyButton.setForeground(Color.WHITE);
+            pro5BuyButton.setBackground(Color.BLACK);
             pro5BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro5Panel.add(pro5BuyButton);
 
@@ -276,20 +292,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro6Panel);
             //product6 image
             pro6img = new JButton();
-            pro6img.setIcon(new ImageIcon("images/phone1.png"));
+            pro6img.setIcon(new ImageIcon(products[5].getProductImage()));
             pro6img.setBounds(15, 15, 350+25, 250);
             pro6img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro6img.setBackground(Color.WHITE);
             pro6Panel.add(pro6img);
             //product6 name
-            pro6Label = new JLabel("Iconic Nokia 3310");
+            pro6Label = new JLabel(products[5].getProductName());
             pro6Label.setBounds(15,(15+250), 300, 30);
             pro6Label.setFont(normalFont);
             pro6Label.setForeground(Color.BLACK);
             pro6Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro6Panel.add(pro6Label);
             //product6 price
-            pro6PriceLabel = new JLabel("Price: 5000tk");
+            pro6PriceLabel = new JLabel(products[5].getProductPrice()+"$");
             pro6PriceLabel.setBounds(15,(250+45), 150, 50);
             pro6PriceLabel.setFont(priceFont);
             pro6PriceLabel.setForeground(Color.BLUE);
@@ -300,8 +316,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro6BuyButton.setBackground(Color.decode("#9dade1"));
             pro6BuyButton.setBounds(300,340, 80, 40);
             pro6BuyButton.setFont(normalFont);
-        pro6BuyButton.setForeground(Color.WHITE);
-        pro6BuyButton.setBackground(Color.BLACK);
+            pro6BuyButton.setForeground(Color.WHITE);
+            pro6BuyButton.setBackground(Color.BLACK);
             pro6BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro6Panel.add(pro6BuyButton);
 
@@ -313,20 +329,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro7Panel);
             //product7 image
             pro7img = new JButton();
-            pro7img.setIcon(new ImageIcon("images/phone1.png"));
+            pro7img.setIcon(new ImageIcon(products[6].getProductImage()));
             pro7img.setBounds(15, 15, 350+25, 250);
             pro7img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro7img.setBackground(Color.WHITE);
             pro7Panel.add(pro7img);
             //product7 name
-            pro7Label = new JLabel("Iconic Nokia 3310");
+            pro7Label = new JLabel(products[6].getProductName());
             pro7Label.setBounds(15,(15+250), 300, 30);
             pro7Label.setFont(normalFont);
             pro7Label.setForeground(Color.BLACK);
             pro7Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro7Panel.add(pro7Label);
             //product7 price
-            pro7PriceLabel = new JLabel("Price: 5000tk");
+            pro7PriceLabel = new JLabel(products[6].getProductPrice()+"$");
             pro7PriceLabel.setBounds(15,(250+45), 150, 50);
             pro7PriceLabel.setFont(priceFont);
             pro7PriceLabel.setForeground(Color.BLUE);
@@ -337,8 +353,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro7BuyButton.setBackground(Color.decode("#9dade1"));
             pro7BuyButton.setBounds(300,340, 80, 40);
             pro7BuyButton.setFont(normalFont);
-        pro7BuyButton.setForeground(Color.WHITE);
-        pro7BuyButton.setBackground(Color.BLACK);
+            pro7BuyButton.setForeground(Color.WHITE);
+            pro7BuyButton.setBackground(Color.BLACK);
             pro7BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro7Panel.add(pro7BuyButton);
 
@@ -350,20 +366,20 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             itemsPanel.add(pro8Panel);
             //product8 image
             pro8img = new JButton();
-            pro8img.setIcon(new ImageIcon("images/phone1.png"));
+            pro8img.setIcon(new ImageIcon(products[7].getProductImage()));
             pro8img.setBounds(15, 15, 350, 250);
             pro8img.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro8img.setBackground(Color.WHITE);
             pro8Panel.add(pro8img);
             //product8 name
-            pro8Label = new JLabel("Iconic Nokia 3310");
+            pro8Label = new JLabel(products[7].getProductName());
             pro8Label.setBounds(15,(15+250), 300, 30);
             pro8Label.setFont(normalFont);
             pro8Label.setForeground(Color.BLACK);
             pro8Label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro8Panel.add(pro8Label);
             //product8 price
-            pro8PriceLabel = new JLabel("Price: 10$");
+            pro8PriceLabel = new JLabel(products[7].getProductPrice()+"$");
             pro8PriceLabel.setBounds(15,(250+45), 150, 50);
             pro8PriceLabel.setFont(priceFont);
             pro8PriceLabel.setForeground(Color.BLUE);
@@ -374,8 +390,8 @@ public class UserDashboardFrame extends JFrame implements ActionListener {
             pro8BuyButton.setBackground(Color.decode("#9dade1"));
             pro8BuyButton.setBounds(300-25,340, 80, 40);
             pro8BuyButton.setFont(normalFont);
-        pro8BuyButton.setForeground(Color.WHITE);
-        pro8BuyButton.setBackground(Color.BLACK);
+            pro8BuyButton.setForeground(Color.WHITE);
+            pro8BuyButton.setBackground(Color.BLACK);
             pro8BuyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             pro8Panel.add(pro8BuyButton);
 
