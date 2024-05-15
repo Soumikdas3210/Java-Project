@@ -39,8 +39,11 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
         normalFont = new Font("Cambria", Font.PLAIN, 20);
 
         jp1 = new JPanel();
-        jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
+        ImageIcon img = new ImageIcon("images/adminDash.png");
+		JLabel imgLabel = new JLabel(img);
+		imgLabel.setBounds(0, 0, 800, 900);
+		jp1.add(imgLabel);
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
@@ -65,20 +68,21 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
         jp2.add(signoutBtn);
 
         userinfoBtn = new JButton();
-        userinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
+        ImageIcon userinfo = new ImageIcon("images/adminDashUserInfo.png");
+        userinfoBtn.setIcon(userinfo);
         userinfoBtn.setBounds(23, 120, 360, 200);
         userinfoBtn.setOpaque(false);
         userinfoBtn.setFocusPainted(true);
         userinfoBtn.setBorder(BorderFactory.createEmptyBorder());
         jp2.add(userinfoBtn);
 
-        userinfoLabel = new JLabel("User Information");
+        userinfoLabel = new JLabel("User Info");
         userinfoLabel.setFont(normalFont);
         userinfoLabel.setBounds(130, 320, 150, 35);
         jp2.add(userinfoLabel);
 
         salesinfoBtn = new JButton();
-        salesinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
+        salesinfoBtn.setIcon(new ImageIcon("images/adminDashTransictionInfo.png"));
         salesinfoBtn.setBounds(403, 120, 360, 200);
         salesinfoBtn.setOpaque(false);
         salesinfoBtn.setFocusPainted(true);
@@ -91,7 +95,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
         jp2.add(salesinfoLabel);
 
         addadminBtn = new JButton();
-        addadminBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
+        addadminBtn.setIcon(new ImageIcon("images/userinfo.jpg"));
         addadminBtn.setBounds(23, 360, 360, 200);
         addadminBtn.setOpaque(false);
         addadminBtn.setFocusPainted(true);
@@ -105,7 +109,7 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
         jp2.add(newadminLabel);
 
         productinfoBtn = new JButton();
-        productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
+        productinfoBtn.setIcon(new ImageIcon("images/adminDashProductInfo.png"));
         productinfoBtn.setBounds(403, 360, 360, 200);
         productinfoBtn.setOpaque(false);
         productinfoBtn.setFocusPainted(true);
