@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.*;
 
@@ -15,11 +14,12 @@ import classes.*;
 public class RegisterFrame extends JFrame implements ActionListener {
 
     private JPanel jp1, jp2;
-    private JLabel usernameLabel, passwordLabel, titleLabel, loginLabel, emaiLabel;
-    private JTextField usernameTextField, emailTextField;
+    private JLabel usernameLabel, passwordLabel, titleLabel, loginLabel, emaiLabel, questionanswerLabel;
+    private JTextField usernameTextField, emailTextField, questionsnanswerTextField;
     private JPasswordField passwordField;
     private JButton loginBtn, registerBtn;
     private Font headingFont, normalFont;
+    private JComboBox securityQsn;
 
     public RegisterFrame() {
         super("First Page");
@@ -32,12 +32,13 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
         jp1 = new JPanel();
         jp1.setBackground(Color.GREEN);
+        jp1.setLayout(null);
         jp1.setBounds(0, 0, 800, 900);
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
-        jp2.setBounds(800, 0, 800, 900);
         jp2.setLayout(null);
+        jp2.setBounds(800, 0, 800, 900);
 
         titleLabel = new JLabel("SIGN UP");
         titleLabel.setFont(headingFont);
@@ -71,9 +72,26 @@ public class RegisterFrame extends JFrame implements ActionListener {
         emailTextField.setBounds(50, 450, 650, 30);
         jp2.add(emailTextField);
 
+        String[] secQsn = { "Choose a Security Question...", "what's your father's name?", "what's your mother's name?",
+                 "whats your favourite pet name?", "what's your favorite sports?", "what's your favourite movie?" };
+         securityQsn = new JComboBox(secQsn);
+         securityQsn.setBounds(50, 505, 250, 25);
+         securityQsn.setSelectedIndex(0);
+         securityQsn.setBackground(Color.white);
+         jp2.add(securityQsn);
+
+        questionanswerLabel = new JLabel("What is your Answer");
+        questionanswerLabel.setFont(normalFont);
+        questionanswerLabel.setBounds(50, 560, 500, 35);
+        jp2.add(questionanswerLabel);
+
+        questionsnanswerTextField = new JTextField();
+        questionsnanswerTextField.setBounds(50, 600, 650, 30);
+        jp2.add(questionsnanswerTextField);
+
         registerBtn = new JButton("Register");
         registerBtn.setFont(normalFont);
-        registerBtn.setBounds(350, 500, 150, 35);
+        registerBtn.setBounds(350, 650, 150, 35);
         registerBtn.addActionListener(this);
         jp2.add(registerBtn);
 
@@ -101,40 +119,53 @@ public class RegisterFrame extends JFrame implements ActionListener {
             String username = usernameTextField.getText();
             String password = passwordField.getText();
             String email = emailTextField.getText();
+            String question = String.valueOf(securityQsn.getSelectedItem());
+            String answer = questionsnanswerTextField.getText();
 
-            File f = new File("data/user.txt");
-
-            FileReader fr = null;
-            BufferedReader br = null;
-
-            try {
-                fr = new FileReader(f);
-                br = new BufferedReader(fr);
-                String line = "";
-                while ((line = br.readLine()) != null) {
-
-                    String words[] = line.split("\t");
-                    if (words[0].equals(username)) {
-                        JOptionPane.showMessageDialog(this, "Invalid ID or Password");
-                        break;
-                    } else {
-                        UserRepository ur = new UserRepository();
-                        System.out.println(username);
-                        ur.registerUser(username, password, email);
-                        LoginFrame lf = new LoginFrame();
-                        lf.setVisible(true);
-                        this.setVisible(false);
-                        break;
-
-                    }
-                }
-
-            } catch (Exception ex3) {
-                System.out.println(ex3.getMessage());
+            UserRepository ur = new UserRepository();
+            int flag = ur.validateUsernameEmail(username,email);
+            System.out.println(flag);
+            if(flag == 1){
+                ur.registerUser(username, password, email, answer, question);
+                LoginFrame lf = new LoginFrame();
+                lf.setVisible(true);
+                this.setVisible(false);
+            } else if(flag == 0){
+                JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
             }
 
+        //     File f = new File("data/user.txt");
+
+        //     FileReader fr = null;
+        //     BufferedReader br = null;
+
+        //     try {
+        //         fr = new FileReader(f);
+        //         br = new BufferedReader(fr);
+        //         String line = "";
+        //         while ((line = br.readLine()) != null) {
+
+        //             String words[] = line.split("\t");
+        //             if (words[0].equals(username)) {
+        //                 JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
+        //                 break;
+        //             } else {
+        //                 UserRepository ur = new UserRepository();
+        //                 ur.registerUser(username, password, email, answer, question);
+        //                 LoginFrame lf = new LoginFrame();
+        //                 lf.setVisible(true);
+        //                 this.setVisible(false);
+        //                 break;
+
+        //             }
+        //         }
+
+        //     } catch (Exception ex3) {
+        //         System.out.println(ex3.getMessage());
+        //     }
+
         } else {
-            System.exit(0);
+           System.exit(0);
         }
     }
 }

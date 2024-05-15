@@ -42,8 +42,7 @@ public class UserRepository {
 		return flag;
 	}
 
-	public void registerUser(String username, String password, String email) {
-		System.out.println(username);
+	public void registerUser(String username, String password, String email, String answer, String question) {
 
 		File f = new File("data/user.txt");
 		try {
@@ -62,6 +61,10 @@ public class UserRepository {
 			fw.write(email);
 			fw.write("\t");
 			fw.write("1");
+			fw.write("\t");
+			fw.write(question);
+			fw.write("\t");
+			fw.write(answer);
 			fw.write("\n");
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -103,6 +106,36 @@ public class UserRepository {
 				System.out.println(ex1.getMessage());
 			}
 		}
+	}
+
+	public int validateUsernameEmail (String username, String email){
+		int flag = 0;
+		File f = new File("data/user.txt");
+
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		try {
+			fr = new FileReader(f);
+			br = new BufferedReader(fr);
+			String line = "";
+			while ((line = br.readLine()) != null) {
+
+				String words[] = line.split("\t");
+				System.out.println(words[2]);
+				if (words[0].equals(username)||words[2].equals(email)) {
+					flag = 0;
+					break;
+				}else {
+					flag = 1;
+				}
+			}
+
+		} catch (Exception ex3) {
+			System.out.println(ex3.getMessage());
+		}
+		return flag;
+
 	}
 
 }

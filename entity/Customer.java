@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import repository.UserRepository;
+import classes.*;
 import views.LoginFrame;
 
 public class Customer extends User {
