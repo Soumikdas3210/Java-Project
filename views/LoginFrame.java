@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import entity.Admin;
 import entity.Customer;
 import classes.*;
 
@@ -108,8 +109,8 @@ public class LoginFrame extends JFrame implements ActionListener {
                 udf.setVisible(true);
                 this.setVisible(false);
             } else if (flag == 0) {
-
-                AdminDashboardFrame udf = new AdminDashboardFrame(username, password);
+                Admin a1 = new Admin(username, password);
+                AdminDashboardFrame udf = new AdminDashboardFrame(a1);
                 udf.setVisible(true);
                 this.setVisible(false);
             } else {

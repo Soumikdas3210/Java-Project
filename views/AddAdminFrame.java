@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import entity.Admin;
 import javax.swing.*;
 import classes.*;
 
@@ -15,12 +16,14 @@ public class AddAdminFrame extends JFrame implements ActionListener {
     private JPasswordField passwordField;
     private JButton backBtn, registerBtn;
     private Font headingFont, normalFont;
+    private Admin a1;
 
-    public AddAdminFrame() {
+    public AddAdminFrame(Admin a1) {
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.a1= a1;
 
         headingFont = new Font("Cambria", Font.PLAIN, 40);
         normalFont = new Font("Cambria", Font.PLAIN, 28);
@@ -89,8 +92,8 @@ public class AddAdminFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals("Back")) {
-            LoginFrame lf = new LoginFrame();
-            lf.setVisible(true);
+            AdminDashboardFrame adf = new AdminDashboardFrame(a1);
+            adf.setVisible(true);
             this.setVisible(false);
         } else if (ae.getActionCommand().equals("Register")) {
             String username = usernameTextField.getText();
@@ -98,8 +101,8 @@ public class AddAdminFrame extends JFrame implements ActionListener {
             String email = emailTextField.getText();
             UserRepository ur = new UserRepository();
             ur.registerAdmin(username, password, email);
-            LoginFrame lf = new LoginFrame();
-            lf.setVisible(true);
+            AdminDashboardFrame adf = new AdminDashboardFrame(a1);
+            adf.setVisible(true);
             this.setVisible(false);
         } else {
             System.exit(0);

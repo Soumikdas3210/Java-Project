@@ -17,24 +17,23 @@ import entity.Admin;
 import classes.*;
 
 public class AdminDashboardFrame extends JFrame implements ActionListener {
-    private String username, password;
 
     JPanel jp1, jp2;
-    JLabel titleLabel, usernameLabel, signoutLabel, userinfoLabel,
+    JLabel titleLabel, usernameLabel, userinfoLabel,
             salesinfoLabel, newadminLabel, employeeLabel,
             productLabel;
-    JButton userinfoBtn, productinfoBtn, addadminBtn, salesinfoBtn, usernameBtn;
+    JButton userinfoBtn, productinfoBtn, addadminBtn, salesinfoBtn, usernameBtn, signoutBtn;
     Font headingFont, normalFont;
 
-    public AdminDashboardFrame(String username, String password) {
+    private Admin a1;
+
+    public AdminDashboardFrame(Admin a1) {
 
         super("First Page");
         super.setSize(1600, 900);
         super.setLayout(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.username = username;
-        this.password = password;
-        Admin a1 = new Admin(username, password);
+        this.a1 = a1;
 
         headingFont = new Font("Cambria", Font.PLAIN, 30);
         normalFont = new Font("Cambria", Font.PLAIN, 20);
@@ -53,20 +52,21 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
         titleLabel.setBounds(20, 18, 300, 35);
         jp2.add(titleLabel);
 
-        usernameBtn = new JButton("User name");
-        usernameBtn.setFont(normalFont);
-        usernameBtn.setBounds(480, 18, 120, 35);
-        usernameBtn.addActionListener(this);
-        jp2.add(usernameBtn);
+        usernameLabel = new JLabel(a1.getUsername());
+        usernameLabel.setFont(normalFont);
+        usernameLabel.setBounds(480, 18, 200, 35);
+        //usernameLabel.addActionListener(this);
+        jp2.add(usernameLabel);
 
-        signoutLabel = new JLabel("Sign Out");
-        signoutLabel.setFont(normalFont);
-        signoutLabel.setBounds(650, 18, 120, 35);
-        jp2.add(signoutLabel);
+        signoutBtn = new JButton("Sign Out");
+        signoutBtn.setFont(normalFont);
+        signoutBtn.setBounds(650, 18, 120, 35);
+        signoutBtn.addActionListener(this);
+        jp2.add(signoutBtn);
 
         userinfoBtn = new JButton();
         userinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        userinfoBtn.setBounds(23, 70, 360, 200);
+        userinfoBtn.setBounds(23, 120, 360, 200);
         userinfoBtn.setOpaque(false);
         userinfoBtn.setFocusPainted(true);
         userinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -74,12 +74,12 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
 
         userinfoLabel = new JLabel("User Information");
         userinfoLabel.setFont(normalFont);
-        userinfoLabel.setBounds(130, 270, 150, 35);
+        userinfoLabel.setBounds(130, 320, 150, 35);
         jp2.add(userinfoLabel);
 
         salesinfoBtn = new JButton();
         salesinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        salesinfoBtn.setBounds(403, 70, 360, 200);
+        salesinfoBtn.setBounds(403, 120, 360, 200);
         salesinfoBtn.setOpaque(false);
         salesinfoBtn.setFocusPainted(true);
         salesinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -87,12 +87,12 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
 
         salesinfoLabel = new JLabel("Sales Information");
         salesinfoLabel.setFont(normalFont);
-        salesinfoLabel.setBounds(520, 270, 180, 35);
+        salesinfoLabel.setBounds(520, 320, 180, 35);
         jp2.add(salesinfoLabel);
 
         addadminBtn = new JButton();
         addadminBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        addadminBtn.setBounds(23, 310, 360, 200);
+        addadminBtn.setBounds(23, 360, 360, 200);
         addadminBtn.setOpaque(false);
         addadminBtn.setFocusPainted(true);
         addadminBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -101,12 +101,12 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
 
         newadminLabel = new JLabel("Add Admin");
         newadminLabel.setFont(normalFont);
-        newadminLabel.setBounds(145, 510, 180, 35);
+        newadminLabel.setBounds(145, 560, 180, 35);
         jp2.add(newadminLabel);
 
         productinfoBtn = new JButton();
         productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        productinfoBtn.setBounds(403, 310, 360, 200);
+        productinfoBtn.setBounds(403, 360, 360, 200);
         productinfoBtn.setOpaque(false);
         productinfoBtn.setFocusPainted(true);
         productinfoBtn.setBorder(BorderFactory.createEmptyBorder());
@@ -114,21 +114,21 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
 
         productLabel = new JLabel("Product Information");
         productLabel.setFont(normalFont);
-        productLabel.setBounds(505, 510, 180, 35);
+        productLabel.setBounds(505, 560, 180, 35);
         jp2.add(productLabel);
 
-        productinfoBtn = new JButton();
-        productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
-        productinfoBtn.setBounds(213, 550, 360, 200);
-        productinfoBtn.setOpaque(false);
-        productinfoBtn.setFocusPainted(true);
-        productinfoBtn.setBorder(BorderFactory.createEmptyBorder());
-        jp2.add(productinfoBtn);
+        // productinfoBtn = new JButton();
+        // productinfoBtn.setIcon(new ImageIcon("image/userinfo.jpg"));
+        // productinfoBtn.setBounds(213, 550, 360, 200);
+        // productinfoBtn.setOpaque(false);
+        // productinfoBtn.setFocusPainted(true);
+        // productinfoBtn.setBorder(BorderFactory.createEmptyBorder());
+        // jp2.add(productinfoBtn);
 
-        productLabel = new JLabel("Employee Information");
-        productLabel.setFont(normalFont);
-        productLabel.setBounds(305, 750, 180, 35);
-        jp2.add(productLabel);
+        // employeeLabel = new JLabel("Employee Information");
+        // employeeLabel.setFont(normalFont);
+        // employeeLabel.setBounds(305, 750, 180, 35);
+        // jp2.add(employeeLabel);
 
         super.add(jp1);
         super.add(jp2);
@@ -137,11 +137,13 @@ public class AdminDashboardFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == addadminBtn) {
-            AddAdminFrame aaf = new AddAdminFrame();
+            AddAdminFrame aaf = new AddAdminFrame(a1);
             aaf.setVisible(true);
             this.setVisible(false);
-        } else if (ae.getSource() == usernameBtn) {
-
+        } else if (ae.getSource() == signoutBtn) {
+            LoginFrame lf = new LoginFrame();
+            lf.setVisible(true);
+            this.setVisible(false);
         }
 
     }
