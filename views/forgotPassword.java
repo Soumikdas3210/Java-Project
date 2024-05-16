@@ -1,15 +1,17 @@
 package views;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class forgotPassword extends JFrame implements ActionListener {
 
-	JLabel titleLabel, userNameLabel, emailLabel, nidLabel, SecurityQuestionLabel, AnswerLabel;
-	TextField userNameText, emailText, nidText, answerText;
-	JComboBox securityQuestionComboBox;
-	JButton backButton, resetButton;
-	JPanel leftPanel, rightPanel;
+	private JLabel titleLabel, passwordLabel, userNameLabel, emailLabel, securityQuestionLabel, answerLabel;
+	private JTextField userNameText, emailText, answerText;
+	private JPasswordField passwordField;
+	private JComboBox securityQuestionComboBox;
+	private JButton backButton, resetButton;
+	private JPanel leftPanel, rightPanel;
 
 	final int width = 1600, height = 900;
 
@@ -23,17 +25,15 @@ public class forgotPassword extends JFrame implements ActionListener {
 		titleLabel = new JLabel("Forgot Password");
 		userNameLabel = new JLabel("User Name");
 		emailLabel = new JLabel("Email");
-		nidLabel = new JLabel("NID Number");
-		SecurityQuestionLabel = new JLabel("Security Question");
-		AnswerLabel = new JLabel("Answer");
-		userNameText = new TextField();
-		emailText = new TextField();
-		nidText = new TextField();
-		answerText = new TextField();
+		securityQuestionLabel = new JLabel("Security Question");
+		answerLabel = new JLabel("Answer");
+		userNameText = new JTextField();
+		emailText = new JTextField();
+		answerText = new JTextField();
 
-		String items[] = { "Security Question 1", "Security Question 2", "Security Question 3", "Security Question 4",
-				"Security Question 5" };
-		securityQuestionComboBox = new JComboBox(items);
+		String items[] = { "Choose a Security Question...", "What's your father's name?", "What's your mother's name?",
+				"What's your favourite pet name?", "What's your favorite sports?", "What's your favourite movie?" };
+		securityQuestionComboBox = new JComboBox<>(items);
 		backButton = new JButton("Back");
 		resetButton = new JButton("Reset Password");
 
@@ -56,24 +56,30 @@ public class forgotPassword extends JFrame implements ActionListener {
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		userNameLabel.setBounds(leftWidth + 100, topHeight + 100, 100, 30);
 		emailLabel.setBounds(leftWidth + 100, topHeight + 150, 100, 30);
-		nidLabel.setBounds(leftWidth + 100, topHeight + 200, 100, 30);
-		SecurityQuestionLabel.setBounds(leftWidth + 100, topHeight + 250, 200, 30);
+		securityQuestionLabel.setBounds(leftWidth + 100, topHeight + 200, 200, 30);
+		answerLabel.setBounds(leftWidth + 100, topHeight + 250, 100, 30);
 
 		userNameText.setBounds(leftWidth + 200, topHeight + 100, 250, 30);
 		userNameText.setEditable(true);
 		emailText.setBounds(leftWidth + 200, topHeight + 150, 250, 30);
 		emailText.setEditable(true);
-		nidText.setBounds(leftWidth + 200, topHeight + 200, 250, 30);
-		nidText.setEditable(true);
-		securityQuestionComboBox.setBounds(leftWidth + 100, topHeight + 300, 200, 30);
-
-		AnswerLabel.setBounds(leftWidth + 100, topHeight + 350, 100, 30);
-		answerText.setBounds(leftWidth + 200, topHeight + 350, 250, 30);
+		securityQuestionComboBox.setBounds(leftWidth + 200, topHeight + 200, 250, 30);
+		answerText.setBounds(leftWidth + 200, topHeight + 250, 250, 30);
 		answerText.setEditable(true);
+
+		passwordLabel = new JLabel("Password ");
+		passwordLabel.setBounds(leftWidth + 100, topHeight + 300, 100, 30);
+		rightPanel.add(passwordLabel);
+
+		passwordField = new JPasswordField();
+		passwordField.setBounds(leftWidth + 200, topHeight + 300, 250, 30);
+		rightPanel.add(passwordField);
 
 		backButton.setBounds(leftWidth + 100, topHeight + 50, 100, 30);
 		backButton.setBackground(Color.decode("#bad69f"));
-		resetButton.setBounds(leftWidth + 150, topHeight + 450, 250, 50);
+
+		backButton.addActionListener(this);
+		resetButton.setBounds(leftWidth + 150, topHeight + 400, 250, 50);
 		resetButton.setFont(new Font("Arial", Font.BOLD, 18));
 		resetButton.setBackground(Color.decode("#617ee6"));
 
@@ -82,11 +88,9 @@ public class forgotPassword extends JFrame implements ActionListener {
 		rightPanel.add(userNameText);
 		rightPanel.add(emailLabel);
 		rightPanel.add(emailText);
-		rightPanel.add(nidLabel);
-		rightPanel.add(nidText);
-		rightPanel.add(SecurityQuestionLabel);
+		rightPanel.add(securityQuestionLabel);
 		rightPanel.add(securityQuestionComboBox);
-		rightPanel.add(AnswerLabel);
+		rightPanel.add(answerLabel);
 		rightPanel.add(answerText);
 		rightPanel.add(backButton);
 		rightPanel.add(resetButton);
@@ -97,5 +101,10 @@ public class forgotPassword extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource()==backButton){
+			LoginFrame lf = new LoginFrame();
+			lf.setVisible(true);
+			this.setVisible(false);
+		}
 	}
 }

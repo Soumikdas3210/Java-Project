@@ -1,8 +1,6 @@
 import javax.swing.*;
 
-import views.AdminDashboardFrame;
-import views.LoginFrame;
-import views.UserDashboardFrame;
+import views.*;
 
 
 public class Main {

@@ -100,10 +100,16 @@ public class AddAdminFrame extends JFrame implements ActionListener {
             String password = passwordField.getText();
             String email = emailTextField.getText();
             UserRepository ur = new UserRepository();
-            ur.registerAdmin(username, password, email);
-            AdminDashboardFrame adf = new AdminDashboardFrame(a1);
-            adf.setVisible(true);
-            this.setVisible(false);
+            int flag = ur.validateUsernameEmail(username,email);
+            System.out.println(flag);
+            if(flag == 1){
+                ur.registerAdmin(username, password, email);
+                LoginFrame lf = new LoginFrame();
+                lf.setVisible(true);
+                this.setVisible(false);
+            } else if(flag == 0){
+                JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
+            }
         } else {
             System.exit(0);
         }

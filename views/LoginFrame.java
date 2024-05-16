@@ -1,19 +1,18 @@
 package views;
 
+import classes.UserRepository;
+import entity.Admin;
+import entity.Customer;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-
-import entity.Admin;
-import entity.Customer;
-import classes.*;
-
 public class LoginFrame extends JFrame implements ActionListener {
 
     private JPanel jp1, jp2;
-    private JLabel usernameLabel, passwordLabel, titleLabel, registerLabel, forgotpasswordLabel;
+    private JLabel usernameLabel, passwordLabel, titleLabel, registerLabel, forgotpasswordLabel, leftLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton loginBtn, registerBtn, forgotpasswordBtn;
@@ -31,6 +30,11 @@ public class LoginFrame extends JFrame implements ActionListener {
         jp1 = new JPanel();
         jp1.setBackground(Color.GREEN);
         jp1.setBounds(0, 0, 800, 900);
+
+        leftLabel = new JLabel(new ImageIcon("images/shop.png"));
+        leftLabel.setBounds(0,0,800,900);
+        jp1.add(leftLabel);
+
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
@@ -74,7 +78,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         forgotpasswordBtn = new JButton("Reset");
         forgotpasswordBtn.setFont(normalFont);
         forgotpasswordBtn.setBounds(270, 700, 150, 35);
-        // forgotpasswordBtn.addActionListener(this);
+        forgotpasswordBtn.addActionListener(this);
         jp2.add(forgotpasswordBtn);
 
         registerLabel = new JLabel("No Account");
@@ -105,7 +109,8 @@ public class LoginFrame extends JFrame implements ActionListener {
             int flag = ur.validateCredentials(username, password);
 
             if (flag == 1) {
-                UserDashboardFrame udf = new UserDashboardFrame(username, password);
+                Customer c1 = new Customer(username, password);
+                UserDashboardFrame udf = new UserDashboardFrame(c1);
                 udf.setVisible(true);
                 this.setVisible(false);
             } else if (flag == 0) {
@@ -116,6 +121,11 @@ public class LoginFrame extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid ID or Password");
             }
+        } else if (ae.getSource() == forgotpasswordBtn) {
+            forgotPassword fp = new forgotPassword();
+            fp.setVisible(true);
+            this.setVisible(false);
         }
+
     }
 }

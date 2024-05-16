@@ -7,7 +7,7 @@ import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
-import entity.Customer;
+
 
 public class UserRepository {
 	public int validateCredentials(String username, String password) {

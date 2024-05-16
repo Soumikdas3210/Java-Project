@@ -1,18 +1,27 @@
+package views;
+
+import entity.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class paymentFrame extends JFrame {
     final int width = 1600, height = 900;
-    Font bigFont, normalFont, hugefont;
-    JPanel mainPanel, leftPanel, rightPanel;
-    JLabel cardHolderLabel, titleLabel, paymentMethodLabel, phoneNumberLabel, pinLabel, otpLabel;
-    JTextField phoneField, pinField, otpField;
-    JButton payButton;
-    JRadioButton bkashRadioButton, rocketRadioButton, nagadRadioButton;
-    ButtonGroup paymentMethodGroup;
+    private Font bigFont, normalFont, hugefont;
+    private JPanel mainPanel, leftPanel, rightPanel;
+    private JLabel cardHolderLabel, titleLabel, paymentMethodLabel, phoneNumberLabel, pinLabel, otpLabel, itemLabel,
+            priceLabel, userNameLabel, leftTitelLabel, skuLabel;
+    private JTextField phoneField, pinField, otpField;
+    private JButton payButton, backButton;
+    private JRadioButton bkashRadioButton, rocketRadioButton, nagadRadioButton;
+    private ButtonGroup paymentMethodGroup;
 
-    public paymentFrame() {
+    void setVisibility(boolean visible) {
+        this.setVisible(visible);
+    }
+
+    public paymentFrame(Product product, Customer c1, String address) {
         super("Payment");
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
@@ -31,11 +40,49 @@ public class paymentFrame extends JFrame {
         leftPanel.setLayout(null);
         mainPanel.add(leftPanel);
 
+        leftTitelLabel = new JLabel("Order Summary");
+        leftTitelLabel.setFont(bigFont);
+        leftTitelLabel.setBounds(250, 150, 200, 60);
+        leftPanel.add(leftTitelLabel);
+
+        itemLabel = new JLabel("Item: " + product.getProductName());
+        itemLabel.setFont(bigFont);
+        itemLabel.setBounds(100, 250, 500, 50);
+        leftPanel.add(itemLabel);
+
+        skuLabel = new JLabel("SKU: " + product.getProductSku());
+        skuLabel.setFont(bigFont);
+        skuLabel.setBounds(100, 300, 200, 50);
+        leftPanel.add(skuLabel);
+
+        priceLabel = new JLabel("Total: " + product.getProductPrice());
+        priceLabel.setFont(bigFont);
+        priceLabel.setBounds(100, 350, 200, 50);
+        leftPanel.add(priceLabel);
+
+        userNameLabel = new JLabel("Buyer: " + c1.getUsername());
+        userNameLabel.setFont(bigFont);
+        userNameLabel.setBounds(100, 400, 200, 50);
+        leftPanel.add(userNameLabel);
+
         rightPanel = new JPanel();
         rightPanel.setLayout(null);
         rightPanel.setBackground(Color.decode("#9dade1"));
         rightPanel.setBounds(800, 0, 800, 900);
         mainPanel.add(rightPanel);
+
+        backButton = new JButton("Back");
+        backButton.setBackground(Color.WHITE);
+        backButton.setBounds(800 - 160, 25, 120, 50);
+        backButton.setFont(bigFont);
+        rightPanel.add(backButton);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                UserDashboardFrame udf = new UserDashboardFrame(c1);
+                udf.setVisible(true);
+                setVisibility(false);
+            }
+        });
 
         titleLabel = new JLabel("Online Payment");
         titleLabel.setFont(bigFont);
@@ -120,9 +167,31 @@ public class paymentFrame extends JFrame {
                 String pin = pinField.getText();
                 String otp = otpField.getText();
 
-                // Call AddTransiction method to write transaction data
-                System.out.println(""+paymentMethod+ phoneNumber+ pin+ otp);
+                // Check if any field is empty
+                if (phoneNumber.isEmpty() || pin.isEmpty() || otp.isEmpty()) {
+                    // Show dialog box prompting the user to fill all details
+                    JOptionPane.showMessageDialog(null, "Please fill all details", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Write data to file
+                    try (FileWriter writer = new FileWriter("data/payment.txt", true);
+                            BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+                        // Construct the data string
+                        String data = product.getProductName() + "\t" + product.getProductPrice() + "\t" +
+                                c1.getUsername() + "\t" + paymentMethod + "\t" + phoneNumber + "\t" + address + "\n";
+                        // Write data to file
+                        bufferedWriter.write(data);
+                        // Notify user
+                        JOptionPane.showMessageDialog(null, "Payment successful!");
+                        UserDashboardFrame udf = new UserDashboardFrame(c1);
+                        udf.setVisible(true);
+                        setVisibility(false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error writing to file: " + ex.getMessage());
+                    }
+                }
             }
         });
+
     }
 }

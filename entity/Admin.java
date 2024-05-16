@@ -26,7 +26,7 @@ public class Admin extends User {
 					
 					String words[] = line.split("\t");
 					if (words[0].equals(username) && words[1].equals(password)) {
-						this.setEmail(words[1]);
+						this.setEmail(words[2]);
 				    }
                 }
            }catch (Exception ex3) {

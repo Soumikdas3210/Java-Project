@@ -14,7 +14,7 @@ import classes.*;
 public class RegisterFrame extends JFrame implements ActionListener {
 
     private JPanel jp1, jp2;
-    private JLabel usernameLabel, passwordLabel, titleLabel, loginLabel, emaiLabel, questionanswerLabel;
+    private JLabel usernameLabel, passwordLabel, titleLabel, loginLabel, emaiLabel, questionanswerLabel, leftLabel;
     private JTextField usernameTextField, emailTextField, questionsnanswerTextField;
     private JPasswordField passwordField;
     private JButton loginBtn, registerBtn;
@@ -34,6 +34,10 @@ public class RegisterFrame extends JFrame implements ActionListener {
         jp1.setBackground(Color.GREEN);
         jp1.setLayout(null);
         jp1.setBounds(0, 0, 800, 900);
+
+        leftLabel = new JLabel(new ImageIcon("images/registration.png"));
+        leftLabel.setBounds(0,0,800,900);
+        jp1.add(leftLabel);
 
         jp2 = new JPanel();
         jp2.setBackground(Color.CYAN);
@@ -116,55 +120,29 @@ public class RegisterFrame extends JFrame implements ActionListener {
             lf.setVisible(true);
             this.setVisible(false);
         } else if (ae.getActionCommand().equals("Register")) {
-            String username = usernameTextField.getText();
-            String password = passwordField.getText();
-            String email = emailTextField.getText();
-            String question = String.valueOf(securityQsn.getSelectedItem());
-            String answer = questionsnanswerTextField.getText();
+    String username = usernameTextField.getText();
+    String password = passwordField.getText();
+    String email = emailTextField.getText();
+    String question = String.valueOf(securityQsn.getSelectedItem());
+    String answer = questionsnanswerTextField.getText();
 
-            UserRepository ur = new UserRepository();
-            int flag = ur.validateUsernameEmail(username,email);
-            System.out.println(flag);
-            if(flag == 1){
-                ur.registerUser(username, password, email, answer, question);
-                LoginFrame lf = new LoginFrame();
-                lf.setVisible(true);
-                this.setVisible(false);
-            } else if(flag == 0){
-                JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
-            }
-
-        //     File f = new File("data/user.txt");
-
-        //     FileReader fr = null;
-        //     BufferedReader br = null;
-
-        //     try {
-        //         fr = new FileReader(f);
-        //         br = new BufferedReader(fr);
-        //         String line = "";
-        //         while ((line = br.readLine()) != null) {
-
-        //             String words[] = line.split("\t");
-        //             if (words[0].equals(username)) {
-        //                 JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
-        //                 break;
-        //             } else {
-        //                 UserRepository ur = new UserRepository();
-        //                 ur.registerUser(username, password, email, answer, question);
-        //                 LoginFrame lf = new LoginFrame();
-        //                 lf.setVisible(true);
-        //                 this.setVisible(false);
-        //                 break;
-
-        //             }
-        //         }
-
-        //     } catch (Exception ex3) {
-        //         System.out.println(ex3.getMessage());
-        //     }
-
-        } else {
+    if (username.isEmpty() || password.isEmpty() || email.isEmpty() || question.isEmpty() || answer.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields must be filled out.");
+    } else {
+        UserRepository ur = new UserRepository();
+        int flag = ur.validateUsernameEmail(username, email);
+        System.out.println(flag);
+        if (flag == 1) {
+            ur.registerUser(username, password, email, answer, question);
+            LoginFrame lf = new LoginFrame();
+            lf.setVisible(true);
+            this.setVisible(false);
+        } else if (flag == 0) {
+            JOptionPane.showMessageDialog(this, "Duplicate Username or Email");
+        }
+    }
+}
+ else {
            System.exit(0);
         }
     }

@@ -5,4 +5,4 @@ Google Pixel 5, 699.99, SKU101, images/pro4.png, 8GB RAM & 128GB ROM
 OnePlus 9 Pro, 899.99, SKU202, images/pro5.png, 12GB RAM & 256GB ROM
 Xiaomi Redmi Note 10, 199.99, SKU303, images/pro6.png, 6GB RAM & 128GB ROM
 Huawei P40 Pro, 999.99, SKU404, images/pro7.png, 8GB RAM & 256GB ROM
-Sony Xperia 1 III, 1299.99, SKU505, images/pro8.png, 12GB RAM & 256GB ROM
+Sony Xperia 1 III, 1299.99, SKU504, images/pro8.png, 12GB RAM & 256GB ROM

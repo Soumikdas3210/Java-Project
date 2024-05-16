@@ -9,7 +9,7 @@ import entity.Customer;
 import java.awt.*;
 import java.awt.event.*;
 
-public class profileFrame extends JFrame implements ActionListener {
+public class UserProfileFrame extends JFrame implements ActionListener {
     final int width = 1600, height = 900;
     private Font bigFont, normalFont, hugefont;
     private JPanel mainPanel, leftPanel, rightPanel;
@@ -18,9 +18,9 @@ public class profileFrame extends JFrame implements ActionListener {
     // JTextField passwordField, confirmPasswordField;
     private JPasswordField passwordField, confirmPasswordField;
     private JButton changePasswordButton, backButton;
-    private Admin a1;
+    private Customer c1;
 
-    public profileFrame(Admin a1) {
+    public UserProfileFrame(Customer c1) {
         super("Profile");
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
@@ -29,7 +29,7 @@ public class profileFrame extends JFrame implements ActionListener {
         this.setSize(width, height);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.a1 = a1;
+        this.c1 = c1;
 
         hugefont = new Font("Roboto", Font.BOLD, 40);
         bigFont = new Font("Roboto", Font.BOLD, 24);
@@ -45,13 +45,13 @@ public class profileFrame extends JFrame implements ActionListener {
         userLabel.setBounds(150, 0, 500, 500);
         leftPanel.add(userLabel);
 
-        usernameLabel = new JLabel(a1.getUsername());
+        usernameLabel = new JLabel(c1.getUsername());
         usernameLabel.setFont(bigFont);
         usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         usernameLabel.setBounds(150, 500, 400, 80);
         leftPanel.add(usernameLabel);
 
-        userEmailLabel = new JLabel(a1.getEmail());
+        userEmailLabel = new JLabel(c1.getEmail());
         userEmailLabel.setFont(bigFont);
         userEmailLabel.setBounds(150, 580, 400, 80);
         userEmailLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,17 +63,17 @@ public class profileFrame extends JFrame implements ActionListener {
         rightPanel.setBounds(800, 0, 800, 900);
         mainPanel.add(rightPanel);
 
-        titleLabel = new JLabel("Change Password");
-        titleLabel.setFont(bigFont);
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setBounds(150, 100, 400, 80);
-        rightPanel.add(titleLabel);
-
         backButton = new JButton("Back");
         backButton.setFont(normalFont);
         backButton.setBounds(670, 20, 80, 30);
         backButton.addActionListener(this);
         rightPanel.add(backButton);
+
+        titleLabel = new JLabel("Change Password");
+        titleLabel.setFont(bigFont);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setBounds(150, 100, 400, 80);
+        rightPanel.add(titleLabel);
 
         passwordLabel = new JLabel("New Password");
         passwordLabel.setFont(bigFont);
@@ -108,13 +108,13 @@ public class profileFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == backButton) {
-            AdminDashboardFrame adf = new AdminDashboardFrame(a1);
-            adf.setVisible(true);
+            UserDashboardFrame udf = new UserDashboardFrame(c1);
+            udf.setVisible(true);
             this.setVisible(false);
         } else if (ae.getSource() == changePasswordButton) {
             if (passwordField.getText().equals(confirmPasswordField.getText())) {
                 UserManager um = new UserManager();
-                um.changePassword(a1.getUsername(), confirmPasswordField.getText());
+                um.changePassword(c1.getUsername(), confirmPasswordField.getText());
                 LoginFrame lf = new LoginFrame();
                 lf.setVisible(true);
                 this.setVisible(false);
